@@ -24,9 +24,6 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE name =:name")
     fun getByName(name: String): TaskEntity
 
-//    @Query("DELETE FROM task WHERE tag =:tag")
-//    fun deleteByTag(tag: String)
-
     @Delete
     fun deleteTask(taskEntity: TaskEntity?)
 

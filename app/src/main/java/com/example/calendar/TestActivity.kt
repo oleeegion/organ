@@ -6,7 +6,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.DB.TaskDatabase
-import com.example.DB.TaskEntity
 
 
 class TestActivity : AppCompatActivity() {
@@ -19,20 +18,8 @@ class TestActivity : AppCompatActivity() {
             TaskDatabase::class.java, "room-database"
             ).allowMainThreadQueries()
              .build()
-//
-//
+
         val taskDao = db.getTaskDao()
-//        taskDao.deleteAll()
-//        val task = TaskEntity(null, "testNull", "01/02/1973")
-//        val query = taskDao.getAll()
-//        println(query)
-//        if (query != null) {
-//            println("task added. Name: " + query.name + query.id)
-//        } else {
-//            println("Пустая строка")
-//        }
-
-
 
 
 
@@ -45,14 +32,7 @@ class TestActivity : AppCompatActivity() {
         val button: Button = findViewById(R.id.button_test)
         button.setOnClickListener {
             val query = taskDao.getAll()
-//            taskDao.addTask(TaskEntity(0, "testTask", "01.02.2003"))
             println(query)
-
-//            if (query != null) {
-//                print("task added. Name: " + query.name + query.id)
-//            } else {
-//                print("Пустая строка")
-//            }
 
         }
 
