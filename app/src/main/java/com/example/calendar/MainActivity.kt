@@ -3,8 +3,10 @@ package com.example.calendar
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.DB.TaskDatabase
@@ -25,8 +27,14 @@ class MainActivity : AppCompatActivity() {
 
         currentDate()
         refreshRecyclerView(db)
+//        getColorTask(db)
+//        val taskEntities = taskDao.getAll()
+//        val priorBtn: ImageButton = findViewById(R.id.priorButton)
+//        val deleteBtn: ImageButton = findViewById(R.id.delButton)
 
-
+        val buttonMenu: Button = findViewById(R.id.btMenu)
+        buttonMenu.setOnClickListener {
+        }
         val btSelectDate: TextView = findViewById(R.id.btSelectDate)
         btSelectDate.setOnClickListener {
             val dateTV: TextView = findViewById(R.id.idDate)
@@ -55,12 +63,13 @@ class MainActivity : AppCompatActivity() {
             val editText: EditText = findViewById(R.id.editText)
             val text: String = editText.text.toString()
             if (text.isNotEmpty()) {
-                taskDao.addTask(TaskEntity(0, text, dateTV.text.toString()))
+                taskDao.addTask(TaskEntity(0, text, dateTV.text.toString(), 0))
                 editText.text.clear()
                 refreshRecyclerView(db)
             } else
                 Toast.makeText(applicationContext, "Введите задачу", Toast.LENGTH_SHORT).show()
         }
+
     }
 
 
@@ -80,10 +89,23 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerAdapter(taskEntities, taskDao)
-
+        recyclerView.adapter = RecyclerAdapter(taskEntities, taskDao, this)
     }
+
+//    private fun getColorTask(database: TaskDatabase) {
+//        val taskDao = database.getTaskDao()
+//        val taskList: List<TaskEntity> = taskDao.getAll()
+//        val priorBtn: ImageButton = findViewById(R.id.priorButton)
+//        for (ent in taskList) {
+//            if (ent.prior == 1) {
+//                priorBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_cube_red))
+//            }
+//        }
+//
+//
+//    }
 }
+
 
 
 

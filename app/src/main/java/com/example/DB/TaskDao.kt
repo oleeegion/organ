@@ -15,18 +15,21 @@ interface TaskDao {
     @Query("SELECT * FROM task")
     fun getAll(): List<TaskEntity>
 
-    @Query("SELECT *FROM task WHERE id = :id")
-    fun getById(id: Int): TaskEntity?
+    @Query("SELECT *FROM task WHERE id = :idDao")
+    fun getById(idDao: Int): TaskEntity?
 
-    @Query("SELECT * FROM task WHERE date =:date")
-    fun getByDate(date: String): TaskEntity
+    @Query("SELECT * FROM task WHERE date = :dateDao")
+    fun getByDate(dateDao: String): TaskEntity
 
-    @Query("SELECT * FROM task WHERE name =:name")
-    fun getByName(name: String): TaskEntity
+    @Query("SELECT * FROM task WHERE name = :nameDao")
+    fun getByName(nameDao: String): TaskEntity
 
     @Delete
     fun deleteTask(taskEntity: TaskEntity?)
 
     @Query("DELETE FROM task")
     fun deleteAll()
+
+    @Query("UPDATE task SET prior = :priorDao WHERE id = :idDao")
+    fun updatePrior(priorDao: Int, idDao: Int?): Int
 }

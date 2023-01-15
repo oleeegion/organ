@@ -15,17 +15,17 @@
         android:background="#ffd1dc"
         />
 
-
-
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/View"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
         android:layout_toLeftOf="@+id/delButton"
+        android:layout_toRightOf="@+id/priorButton"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_vertical"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -44,8 +44,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/View"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight= "6dp"
         android:background="#fff0f5"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <ImageButton
+        android:id="@+id/priorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/View"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft= "6dp"
+        android:background="#fff0f5"
+        app:srcCompat="@drawable/ic_cube_gray1" />
 </RelativeLayout>
