@@ -27,14 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         currentDate()
         refreshRecyclerView(db)
-//        getColorTask(db)
-//        val taskEntities = taskDao.getAll()
-//        val priorBtn: ImageButton = findViewById(R.id.priorButton)
-//        val deleteBtn: ImageButton = findViewById(R.id.delButton)
 
-        val buttonMenu: Button = findViewById(R.id.btMenu)
-        buttonMenu.setOnClickListener {
-        }
         val btSelectDate: TextView = findViewById(R.id.btSelectDate)
         btSelectDate.setOnClickListener {
             val dateTV: TextView = findViewById(R.id.idDate)
@@ -91,19 +84,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = RecyclerAdapter(taskEntities, taskDao, this)
     }
-
-//    private fun getColorTask(database: TaskDatabase) {
-//        val taskDao = database.getTaskDao()
-//        val taskList: List<TaskEntity> = taskDao.getAll()
-//        val priorBtn: ImageButton = findViewById(R.id.priorButton)
-//        for (ent in taskList) {
-//            if (ent.prior == 1) {
-//                priorBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_cube_red))
-//            }
-//        }
-//
-//
-//    }
 }
 
 

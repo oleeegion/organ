@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff0f5"
+
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/View"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ffd1dc" />
+
+    <View
+        android:id="@+id/View1"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/textViewName"
+        android:layout_alignRight="@+id/textViewName"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="10dp"
+        android:background="#ffd1dc" />
+
+    <TextView
+        android:id="@+id/textViewId"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@+id/View"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_toStartOf="@+id/delButton"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#674C52"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewExe"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/View1"
+        android:layout_alignStart="@+id/textViewName"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="2dp"
+        android:text="Выполнить до:"
+        android:textSize="12sp"
+        android:textColor="#948185"/>
+
+    <TextView
+        android:id="@+id/textViewDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/View1"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@+id/textViewExe"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textSize="12sp"
+        android:textColor="#948185"/>
+
+    <ImageButton
+        android:id="@+id/addDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/View1"
+        android:layout_alignStart="@+id/textViewName"
+        android:layout_alignEnd="@+id/textViewDeadline"
+        android:layout_alignBottom="@+id/textViewDeadline"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/delButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/View"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="5dp"
+        android:background="#fff0f5"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+
+</RelativeLayout>

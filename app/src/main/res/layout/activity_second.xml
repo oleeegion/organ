@@ -14,16 +14,16 @@
         android:id="@+id/button_return2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginStart="5dp"
         android:text="&lt;&lt;"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewDay"
+        android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Проекты"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="8dp"
@@ -39,54 +39,40 @@
         android:id="@+id/secondRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDay"
-        tools:listitem="@layout/recyclerview_maket" />
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        tools:listitem="@layout/recycler_project_maket" />
+
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="start|top"
+        android:layout_marginStart="5dp"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName"
+        tools:ignore="MissingConstraints"
+        android:textColor="#674C52"/>
 
     <ImageButton
-        android:id="@+id/buttonBack"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
-        android:background="#ffd1dc"
+        android:id="@+id/imageButtonAdd"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="fitCenter"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewDay"
-        app:layout_constraintEnd_toStartOf="@+id/textViewDay"
-        app:layout_constraintTop_toTopOf="@+id/textViewDay"
-        android:layout_marginEnd="18dp"
-
-        app:srcCompat="?attr/homeAsUpIndicator"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/buttonForward"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_marginStart="5dp"
         android:background="#ffd1dc"
-        android:rotationY="180"
-        android:scaleType="fitCenter"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewDay"
-        app:layout_constraintLeft_toRightOf="@id/textViewDay"
-        app:layout_constraintStart_toEndOf="@+id/textViewDay"
-        app:layout_constraintTop_toTopOf="@+id/textViewDay"
-        android:layout_marginStart="18dp"
-
-        app:srcCompat="?attr/homeAsUpIndicator"
-        tools:ignore="MissingConstraints" />
-
-    <!--    <Button-->
-<!--        android:id="@+id/button_group"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Выбрать группу"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/button_return2"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintLeft_toRightOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/editText"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 
 

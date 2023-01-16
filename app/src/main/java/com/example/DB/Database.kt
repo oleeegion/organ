@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [TaskEntity::class], version = 5)
+@Database(entities = [TaskEntity::class, ProjectEntity::class], version = 6)
 abstract class TaskDatabase: RoomDatabase() {
     abstract fun getTaskDao(): TaskDao
+    abstract fun getProjectDao(): ProjectDao
     companion object {
         @Volatile
         private var INSTANCE: TaskDatabase? = null

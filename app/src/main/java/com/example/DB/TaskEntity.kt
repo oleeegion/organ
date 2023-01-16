@@ -11,3 +11,10 @@ data class TaskEntity(
     @ColumnInfo(name  = "date") val date: String,
     @ColumnInfo(name  = "prior") val prior: Int
 )
+
+@Entity(tableName = "project")
+data class ProjectEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name  = "name") val name: String,
+    @ColumnInfo(name  = "date") val date: String?
+)

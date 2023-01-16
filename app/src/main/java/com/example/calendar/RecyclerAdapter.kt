@@ -88,10 +88,10 @@ class RecyclerAdapter(private val taskEntities: List<TaskEntity>,
     // привязать к объекту viewHolder данные для отображения
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pos = taskEntities[position]
-        holder.deleteTask(position)
         holder.nameTextView.text = pos.name
         holder.idTextView.text = pos.id.toString()
 
+        holder.deleteTask(position)
         holder.getPriorTask()
         holder.setColorTask(pos)
     }

@@ -21,7 +21,7 @@
         android:layout_height="48dp"
         android:layout_below="@+id/View"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="36dp"
+        android:layout_marginLeft="38dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
         android:layout_toLeftOf="@+id/delButton"
@@ -30,7 +30,7 @@
         android:gravity="center_vertical"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#674C52"
-        android:textSize="20sp" />
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/textViewId"
@@ -42,10 +42,10 @@
         android:id="@+id/delButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/View"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight= "6dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="6dp"
         android:background="#fff0f5"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
@@ -53,10 +53,10 @@
         android:id="@+id/priorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/View"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft= "6dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="15dp"
         android:background="#fff0f5"
         app:srcCompat="@drawable/ic_cube_gray1" />
 </RelativeLayout>
