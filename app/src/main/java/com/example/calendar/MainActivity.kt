@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) //метод для вызова экрана
 
-
         val db: TaskDatabase = TaskDatabase.getDatabase(applicationContext)
         val taskDao = db.getTaskDao()
 
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
-
         val buttonAdd: ImageButton = findViewById(R.id.imageButton1)
         buttonAdd.setOnClickListener {
             val dateTV: TextView = findViewById(R.id.idDate)
@@ -62,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             } else
                 Toast.makeText(applicationContext, "Введите задачу", Toast.LENGTH_SHORT).show()
         }
-
     }
 
 

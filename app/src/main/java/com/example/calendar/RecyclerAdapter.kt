@@ -28,59 +28,53 @@ class RecyclerAdapter(private val taskEntities: List<TaskEntity>,
         private val priorBtn: ImageButton = itemView.findViewById(R.id.priorButton)
 
         fun setColorTask(task: TaskEntity) {
-                when (task.prior) {
-                    1 ->{
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_red))
-                        }
-                    2 ->{
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_yellow))
-                        }
-                    3 ->{
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_green))
+            when (task.prior) {
+                1 ->{
+                    priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_red)) }
+                2 ->{
+                    priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_yellow)) }
+                3 ->{
+                    priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_green)) }
+            }
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        fun deleteTask(index: Int){
+            deleteBtn.setOnClickListener {
+                val task: TaskEntity? = taskDao.getById(idTextView.text.toString().toInt())
+                taskDao.deleteTask(task)
+                tasks.removeAt(index)
+                notifyDataSetChanged()
+            }
+        }
+
+        fun getPriorTask(){
+            priorBtn.setOnClickListener {
+                val popupMenu = PopupMenu(act, priorBtn)
+                val task: TaskEntity? = taskDao.getById(idTextView.text.toString().toInt())
+
+                popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.menu1 -> {
+                            priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_red))
+                            taskDao.updatePrior(1, task?.id)}
+                        R.id.menu2 -> {
+                            priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_yellow))
+                            taskDao.updatePrior(2, task?.id)}
+                        R.id.menu3 -> {
+                            priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_green))
+                            taskDao.updatePrior(3, task?.id)}
                     }
-                }
+                    true
+                })
+                popupMenu.show()
+            }
         }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun deleteTask(index: Int){
-        deleteBtn.setOnClickListener {
-            val task: TaskEntity? = taskDao.getById(idTextView.text.toString().toInt())
-            taskDao.deleteTask(task)
-            tasks.removeAt(index)
-            notifyDataSetChanged()
-        }
-    }
-
-    fun getPriorTask(){
-        priorBtn.setOnClickListener {
-            val popupMenu = PopupMenu(act, priorBtn)
-
-            val task: TaskEntity? = taskDao.getById(idTextView.text.toString().toInt())
-            println(task?.prior)
-
-            popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                when(item.itemId) {
-                    R.id.menu1 -> {
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_red))
-                        taskDao.updatePrior(1, task?.id) }
-                    R.id.menu2 -> {
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_yellow))
-                        taskDao.updatePrior(2, task?.id) }
-                    R.id.menu3 -> {
-                        priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_green))
-                        taskDao.updatePrior(3, task?.id) }
-                }
-                true
-            })
-            popupMenu.show()
-        }
-    }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context)
+        val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recyclerview_maket, parent, false)
         return ViewHolder(itemView)
     }

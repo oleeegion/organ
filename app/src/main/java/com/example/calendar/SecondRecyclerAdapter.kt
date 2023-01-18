@@ -2,6 +2,11 @@ package com.example.calendar
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +14,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.DB.ProjectDao
 import com.example.DB.ProjectEntity
-import com.example.DB.TaskEntity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -30,31 +36,27 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
         private val delButton: ImageButton = itemView.findViewById(R.id.delButton)
         private val buttonDeadline: ImageButton = itemView.findViewById(R.id.addDeadline)
 
-        fun currentDate(): String? {
+        private fun currentDate(): String? {
             val curDate = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
             val formatted = curDate.format(formatter)
             return formatted
         }
 
-        fun setColorDeadline(project: ProjectEntity, index: Int) {
+        fun getColorDeadline(project: ProjectEntity, index: Int) {
             val date: TextView = itemView.findViewById(R.id.textViewDeadline)
             val deadlineExe: TextView = itemView.findViewById(R.id.textViewExe)
             date.text = project.date
             if (project.date == currentDate()){
                 date.setTextColor(Color.parseColor("#e66b6b"))
                 deadlineExe.setTextColor(Color.parseColor("#e66b6b"))
+                createNotification()
+                createChannel("01", "deadline")
             }
         }
         fun addDeadline(project: ProjectEntity, index: Int) {
             val date: TextView = itemView.findViewById(R.id.textViewDeadline)
             val deadlineExe: TextView = itemView.findViewById(R.id.textViewExe)
-//            date.text = project.date
-
-//            if (project.date == currentDate()){
-//                date.setTextColor(Color.parseColor("#e66b6b"))
-//                deadlineExe.setTextColor(Color.parseColor("#e66b6b"))
-//            }
 
             buttonDeadline.setOnClickListener {
                 val c = Calendar.getInstance()
@@ -71,11 +73,11 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
                     if ("$dayOfMonth.$month.$year" == currentDate()){
                         date.setTextColor(Color.parseColor("#e66b6b"))
                         deadlineExe.setTextColor(Color.parseColor("#e66b6b"))
-                    }
+                        createNotification()
+                        createChannel("01", "deadline")}
                     else {
                         date.setTextColor(Color.parseColor("#948185"))
-                        deadlineExe.setTextColor(Color.parseColor("#948185"))
-                    }
+                        deadlineExe.setTextColor(Color.parseColor("#948185")) }
                 }, year, month, day)
                 day_choice.show()
             }
@@ -90,11 +92,42 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
                 notifyDataSetChanged()
             }
         }
+
+        @SuppressLint("UnspecifiedImmutableFlag")
+        fun createNotification() {
+            val notificationId = 1
+            val intent = Intent(act.applicationContext, SecondActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(
+                act.applicationContext,
+                notificationId,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val builder = NotificationCompat.Builder(act, "01")
+                .setSmallIcon(R.drawable.ic_candy)
+                .setLargeIcon(BitmapFactory.decodeResource(act.resources, R.drawable.ic_panic))
+                .setContentTitle("Внимание")
+                .setContentText("Дедлайн горит!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+
+            val notificationManager = NotificationManagerCompat.from(act)
+            notificationManager.notify(notificationId, builder.build())
+        }
+
+        private fun createChannel(channelId: String, channelName: String) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_LOW)
+            val notificationManager = act.getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context)
+        val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_project_maket, parent, false)
         return ViewHolder(itemView)
     }
@@ -107,7 +140,7 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
 
         holder.deleteProject(position)
         holder.addDeadline(pos, position)
-        holder.setColorDeadline(pos, position)
+        holder.getColorDeadline(pos, position)
     }
 
     override fun getItemCount(): Int {
