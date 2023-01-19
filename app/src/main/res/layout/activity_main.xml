@@ -5,23 +5,23 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffd1dc"
     tools:context=".MainActivity">
-
+<!--    android:textColor="#806065"-->
 
     <TextView
         android:id="@+id/idDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="8dp"
+        android:padding="11dp"
         android:text="Дата"
         android:fontFamily="sans-serif-condensed"
         android:textAlignment="center"
-        android:textColor="#806065"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/btSelectDate" />
+        app:layout_constraintTop_toBottomOf="@+id/btSelectDate"
+        android:layout_marginTop="5dp"
+        />
 
     <Button
         android:id="@+id/btSelectDate"
@@ -32,12 +32,21 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="5dp"
         tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btSelectTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Выбрать тему"
+        app:layout_constraintLeft_toRightOf="@+id/btSelectDate"
+        android:layout_marginStart="5dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:text="&gt;&gt;"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:text="Проекты"
         android:fontFamily="sans-serif-condensed"
         android:layout_marginEnd="5dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -54,8 +63,7 @@
         android:inputType="textMultiLine"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idDate"
-        android:textColor="#674C52"/>
+        app:layout_constraintTop_toBottomOf="@+id/idDate"/>
 
     <ImageButton
         android:id="@+id/imageButton1"
@@ -63,7 +71,7 @@
         android:layout_height="40dp"
         android:scaleType="fitCenter"
         android:layout_marginStart="5dp"
-        android:background="#ffd1dc"
+        android:background="@android:color/transparent"
         app:layout_constraintLeft_toRightOf="@+id/editText"
         app:layout_constraintTop_toTopOf="@+id/editText"
         app:srcCompat="@android:drawable/ic_menu_add" />

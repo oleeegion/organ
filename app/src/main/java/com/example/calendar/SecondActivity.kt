@@ -11,19 +11,23 @@ import com.example.DB.TaskDatabase
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val db: TaskDatabase = TaskDatabase.getDatabase(applicationContext)
+        val themeDao = db.getThemeDao()
+        setTheme(themeDao, this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-
-        val db: TaskDatabase = TaskDatabase.getDatabase(applicationContext)
         val projectDao = db.getProjectDao()
 
         refreshRecyclerView(db)
+
 
         val buttonReturn: Button = findViewById(R.id.button_return2)
         buttonReturn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
         val buttonAdd: ImageButton = findViewById(R.id.imageButtonAdd)
         buttonAdd.setOnClickListener {
             val editText: EditText = findViewById(R.id.editText)
@@ -37,6 +41,7 @@ class SecondActivity : AppCompatActivity() {
         }
 
     }
+
 
 
     private fun refreshRecyclerView(database: TaskDatabase) {

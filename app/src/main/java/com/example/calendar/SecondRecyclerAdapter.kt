@@ -43,7 +43,7 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
             return formatted
         }
 
-        fun getColorDeadline(project: ProjectEntity, index: Int) {
+        fun getColorDeadline(project: ProjectEntity) {
             val date: TextView = itemView.findViewById(R.id.textViewDeadline)
             val deadlineExe: TextView = itemView.findViewById(R.id.textViewExe)
             date.text = project.date
@@ -54,10 +54,9 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
                 createChannel("01", "deadline")
             }
         }
-        fun addDeadline(project: ProjectEntity, index: Int) {
+        fun addDeadline(project: ProjectEntity) {
             val date: TextView = itemView.findViewById(R.id.textViewDeadline)
             val deadlineExe: TextView = itemView.findViewById(R.id.textViewExe)
-
             buttonDeadline.setOnClickListener {
                 val c = Calendar.getInstance()
                 val year = c.get(Calendar.YEAR)
@@ -139,14 +138,11 @@ class SecondRecyclerAdapter(private val projectEntities: List<ProjectEntity>,
         holder.idTextView.text = pos.id.toString()
 
         holder.deleteProject(position)
-        holder.addDeadline(pos, position)
-        holder.getColorDeadline(pos, position)
+        holder.addDeadline(pos)
+        holder.getColorDeadline(pos)
     }
 
     override fun getItemCount(): Int {
         return projectEntities.size
     }
-
-
-
 }

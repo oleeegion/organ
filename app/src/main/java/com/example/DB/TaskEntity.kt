@@ -18,3 +18,9 @@ data class ProjectEntity(
     @ColumnInfo(name  = "name") val name: String,
     @ColumnInfo(name  = "date") val date: String?
 )
+
+@Entity(tableName = "theme")
+data class ThemeEntity(
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name  = "name") val name: String
+)

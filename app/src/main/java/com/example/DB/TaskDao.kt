@@ -18,12 +18,6 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE id = :idDao")
     fun getById(idDao: Int): TaskEntity?
 
-//    @Query("SELECT * FROM task WHERE date = :dateDao")
-//    fun getByDate(dateDao: String): TaskEntity
-
-//    @Query("SELECT * FROM task WHERE name = :nameDao")
-//    fun getByName(nameDao: String): TaskEntity
-
     @Delete
     fun deleteTask(taskEntity: TaskEntity?)
 
@@ -53,4 +47,16 @@ interface ProjectDao {
 
     @Query("UPDATE project SET date = :dateDao WHERE id = :idDao")
     fun updateDate(dateDao: String, idDao: Int?): Int
+}
+
+@Dao
+interface ThemeDao {
+    @Insert
+    fun addTheme(themeEntity: ThemeEntity)
+
+    @Query("SELECT * FROM theme WHERE id = :idDao")
+    fun getById(idDao: Int): ThemeEntity?
+
+    @Query("UPDATE theme SET name = :themeDao WHERE id = :idDao")
+    fun updateTheme(idDao: Int?, themeDao: String): Int
 }

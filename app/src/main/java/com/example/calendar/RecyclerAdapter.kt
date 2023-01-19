@@ -53,8 +53,8 @@ class RecyclerAdapter(private val taskEntities: List<TaskEntity>,
                 val popupMenu = PopupMenu(act, priorBtn)
                 val task: TaskEntity? = taskDao.getById(idTextView.text.toString().toInt())
 
-                popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener{ item ->
                     when(item.itemId) {
                         R.id.menu1 -> {
                             priorBtn.setImageDrawable(ContextCompat.getDrawable(act, R.drawable.ic_cube_red))
@@ -67,7 +67,7 @@ class RecyclerAdapter(private val taskEntities: List<TaskEntity>,
                             taskDao.updatePrior(3, task?.id)}
                     }
                     true
-                })
+                }
                 popupMenu.show()
             }
         }
@@ -93,5 +93,4 @@ class RecyclerAdapter(private val taskEntities: List<TaskEntity>,
     override fun getItemCount(): Int {
         return taskEntities.size
     }
-
 }

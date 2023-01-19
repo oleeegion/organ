@@ -3,14 +3,14 @@ package com.example.calendar
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.DB.TaskDatabase
 import com.example.DB.TaskEntity
+import com.example.DB.ThemeDao
+import com.example.DB.ThemeEntity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -18,14 +18,17 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val db: TaskDatabase = TaskDatabase.getDatabase(applicationContext)
+        val themeDao = db.getThemeDao()
+        setTheme(themeDao, this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) //метод для вызова экрана
-
-        val db: TaskDatabase = TaskDatabase.getDatabase(applicationContext)
         val taskDao = db.getTaskDao()
 
         currentDate()
         refreshRecyclerView(db)
+
 
         val btSelectDate: TextView = findViewById(R.id.btSelectDate)
         btSelectDate.setOnClickListener {
@@ -43,11 +46,31 @@ class MainActivity : AppCompatActivity() {
             }, year, month, day)
             day_choice.show()
         }
+
         val buttonAct: Button = findViewById(R.id.button_activity)
         buttonAct.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
+
+        val buttonTheme: Button = findViewById(R.id.btSelectTheme)
+        buttonTheme.setOnClickListener {
+            val popupMenu = PopupMenu(this, buttonTheme)
+            popupMenu.menuInflater.inflate(R.menu.popup_menu_themes, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener{ item ->
+                when(item.itemId) {
+                    R.id.peach -> {
+                        themeDao.updateTheme(1, "peach")
+                        recreate() }
+                    R.id.grape -> {
+                        themeDao.updateTheme(1, "grape")
+                        recreate() }
+                }
+                true
+            }
+            popupMenu.show()
+        }
+
         val buttonAdd: ImageButton = findViewById(R.id.imageButton1)
         buttonAdd.setOnClickListener {
             val dateTV: TextView = findViewById(R.id.idDate)
@@ -61,6 +84,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Введите задачу", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 
     private fun currentDate() {
@@ -83,7 +107,18 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+fun setTheme(themeDao: ThemeDao, act: AppCompatActivity) {
+    val checkNullTheme = themeDao.getById(1)
+    if (checkNullTheme == null)
+        themeDao.addTheme(ThemeEntity(1, "peach"))
 
-
+    val theme = themeDao.getById(1)
+    when(theme!!.name) {
+        "peach" ->
+            act.setTheme(R.style.Theme_Calendar_Peach)
+        "grape" ->
+            act.setTheme(R.style.Theme_Calendar_Grape)
+    }
+}
 
 
